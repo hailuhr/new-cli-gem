@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require './lib/gem_project'
+
+GemProject::CLI.new.call
+#encapsulation
