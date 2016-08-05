@@ -4,9 +4,9 @@ require 'nokogiri'
 
 require_relative "gem_project/version"
 require_relative 'gem_project/cli'
-require_relative 'gem_project/community_meetings'
+require_relative 'gem_project/community_meeting.rb'
 
 
-# module Gem
-#   # Your code goes here...
-# end
+module GemProject
+  # Your code goes here...
+end

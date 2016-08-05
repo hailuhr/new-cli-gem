@@ -2,56 +2,79 @@
 class GemProject::CLI
 
   def call
-    puts "Todays GemProject"
-    list_
+    puts "Welcome to Community Meetings! Learn more about what's happening in your neighborhood. Select your neighborhood of choice to know what's being discussed for the neighborhood and the details for its community meetings.\n"
     menu
     goodbye
   end
 
   def list_
-    #here docs? blog jay fields.com
-    # puts "List of things  1 and 2 "
-    @meetings = GemProject::CommunityMeetings.boards
-    #^^changing it from being hardcoded
-    @meetings.each.with_index(1) do |meetings, i|
-      puts "#{i}. #{meetings.name} - #{meetings.address} - #{meetings.url}"
-    end
+    @meetings = GemProject::CommunityMeeting.scrape_all
+    count = 0
+    @meetings.each do |meeting|
+        puts "#{count += 1}. #{meeting.neighborhoods.join(",")}"
+      end
   end
 
-  def menu
-    input = nil
-      while input != "exit"
-      puts "Enter the number of the information you would like to view. Type list to see all options again. To quit the program type exit."
-      input = gets.strip.downcase
+    def menu
+      puts "\nEnter the number of the neighborhood you would like to get more information on. Type list to see all options again. To quit the program type exit.\n"
+      list_
+      puts
+      # binding.pry
+      input = nil
 
-      if input.to_i > 0
-        the_meeting = @meetings[input.to_i - 1]
-        puts "#{the_meeting.name} - #{the_meeting.address} - #{the_meeting.url}"
-        puts @meetings[input.to_i - 1]
-      elsif input == "list"
-        list_
-      else
-        puts "Please type list, exit, or an option number."
+      while input != "exit"
+      input = gets.strip.downcase
+          if input.to_i > 0
+            print_meeting_info(input)
+            menu
+          elsif input == "list"
+            list_
+            puts "\n\nEnter the number of the neighborhood you would like to get more information on. Type list to see all options again. To quit the program type exit."
+          else
+            puts "Please type list, exit, or an option number.\n\n"
+          end
       end
 
-        # case input
-        # when "1"
-        #   puts "More info on option 1..."
-        # when "2"
-        #   puts "More info on option 2..."
-        # when "3"
-        #   puts "More info on option 3..."
-        # when "list"
-        #   list_
-        # else
-        #   puts "Please type list, exit, or an option number."
-        # end
+    end
 
+
+    def print_meeting_info(input)
+      # binding.pry
+      i = input.to_i
+      meeting = @meetings[i.to_i - 1]
+      puts "\nYou selected #{meeting.neighborhoods.join(",")} - #{meeting.name}\n"
+      puts "\nWhat information would you like about the community's meeting?\n"
+      puts "\nEnter 'time' for the meeting dates and times, 'address' for the meeting's address, 'phone' for the board's phone number, 'agenda' for the latest agenda, 'website' for the webpage, or 'menu' for the main page \n"
+
+      while i != "menu"
+      i = gets.strip.downcase
+          if i == "address"
+            puts meeting.address
+            puts "\nEnter time, address, phone, agenda, website, or menu.\n"
+          elsif i == "website"
+            puts meeting.url
+            puts "\nEnter time, address, phone, agenda, website, or menu.\n"
+          elsif i == "time"
+            puts meeting.hours
+            puts "\nEnter time, address, phone, agenda, website, or menu.\n"
+          elsif i == "phone"
+            puts meeting.phone
+            puts "\nEnter time, address, phone, agenda, website, or menu.\n"
+            #last agenda
+            #open the website
+          elsif i == "agenda"
+            puts meeting.agenda
+            puts "\nEnter time, address, phone, agenda, website, or menu.\n"
+          else
+            #why does the below repeat when main is typed
+            puts "\nType 'menu' for the main page, 'website' for the webpage, 'time' for the meeting dates and hours, 'address' for the meeting's address, 'phone' for the board's phone number, or 'agenda' for the latest agenda. \n"
+          end
       end
     end
 
+
     def goodbye
-      puts "Until the next time!"
+      puts "Until next time!"
     end
 
 end

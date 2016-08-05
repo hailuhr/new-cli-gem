@@ -1,0 +1,80 @@
+require 'pry'
+require 'open-uri'
+# require_relative './gem_project.rb'
+
+class GemProject::CommunityMeeting
+# class CommunityMeeting
+  attr_accessor :name, :neighborhoods, :address, :url, :phone
+
+  # binding.pry
+  def initialize
+  end
+
+  def self.scrape_meetings
+    binding.pry
+    meetings = []
+
+    meetings << self.scrape_all
+    # board_1 = self.new
+    # board_1.name = "Community board 1"
+    # board_1.neighborhood = "neighborhood 1"
+    # board_1.address = "Address"
+    # board_1.url = "www.gov.com"
+    #
+    # board_2 = self.new
+    # board_2.name = "Community board 1"
+    # board_2.neighborhood = "neighborhood 1"
+    # board_2.address = "Address"
+    # board_2.url = "www.gov.com"
+
+
+  #  [board_1, board_2]
+    meetings
+  end
+    #
+    def self.scrape_all
+      doc = Nokogiri::HTML(open("http://www.nyc.gov/html/cau/html/cb/manhattan.shtml"))
+      meetings = []
+      array_of_board_neighborhoods = doc.css('td.cb_text#top').map do |el|
+        meeting = GemProject::CommunityMeeting.new
+        meeting.neighborhoods = el.text.split(',')
+        meetings << meeting
+      end
+            binding.pry
+      array_of_board_title = doc.css('td.cb_title').map do |title| title.text end
+          meetings.each_with_index do |meeting, i|
+              meeting.name = array_of_board_title[i]
+          end
+
+      array_of_urls = doc.css('td.cb_text a/@href').map do |el| el.text end
+          meetings.each_with_index do |meeting, i|
+            meeting.url = array_of_urls[i]
+          end
+
+      array = doc.css('tbody').map do |el| el.text end
+          meetings.each_with_index do |meeting, i|
+            meeting.address = array[i].split("\n").detect do |el| el if el.include?("Address: ") end.gsub(/Ph.*/, "").gsub("Address: ", "")
+            meeting.phone = array[i].scan(/Phone: (\d*-\d*-\d*)/).flatten.join
+            end
+
+            # binding.pry
+      meetings
+    end
+
+
+  def self.find_by_name(name)
+    self.detect{ |n| n == name }
+                binding.pry
+  end
+
+
+end
+
+
+hanna = GemProject::CommunityMeeting.new
+
+# hanna.scrape_index_page
+
+
+#neighborhoods doc.css('td.cb_text#top').map do |el| el.text end
+# doc.css('td.cb_text#top').map{|el| el.text}[1]
