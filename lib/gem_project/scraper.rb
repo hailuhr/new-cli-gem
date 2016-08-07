@@ -67,9 +67,10 @@ class Scraper
     def self.scrape_hours(nyc_url)
       # doc = Nokogiri::HTML(open("http://www.nyc.gov/html/cau/html/cb/manhattan.shtml"))
       doc = Nokogiri::HTML(open(nyc_url))
-      hours = []
+      time = []
       array = doc.css('tbody').map do |el| el.text end
-          array.each_with_index.map do |meeting, i|
+
+      array.each_with_index.map do |meeting, i|
 
           mtg_hours = []
           k = array[i].index("Meeting")
@@ -79,16 +80,23 @@ class Scraper
           words << array[i][k..j-1]
           hours = words.split("Cabinet")
           part1 = "Board #{hours[0]}. "
-          part2 = "Cabinet" + hours[1].gsub("\n", "")
-          mtg_hours = [part2 + part2]
+          part2 = "Cabinet #{hours[1].gsub("\n", "")}."
+          mtg_hours = [part1 + part2]
         #why is this different than hours
-          hours +=  mtg_hours
+          time << mtg_hours
+
+
+          # binding.pry
         end
-         hours
+        no_repeated_times = []
+
+        time.each_with_index do |el, i|
+          no_repeated_times << el if i.even?
+        end
+
+        no_repeated_times
         # binding.pry
       end
-
-
 
 
       def self.meeting_hash(url)
@@ -106,14 +114,13 @@ class Scraper
           meeting[:neighborhoods] = scrape_neighborhoods(url)[i.to_i].join(",")
           meeting[:address] = scraped_addresses(url)[i.to_i]
 
-          if meeting[:name] == "Community Board 10"
-            meeting[:agenda] = "PDF files of Community Board 10's agenda can be found here: http://www.nyc.gov/html/mancb10/html/board/minutes.shtml"
-          elsif meeting[:name] == "Community Board 1"
-            meeting[:agenda] = one_agenda("http://www.nyc.gov/html/mancb1/html/community/community.shtml")
-          elsif
-            meeting[:agenda] = "Agenda currently unavailable - can be found on home website"
-
-          end
+            if meeting[:name] == "Community Board 10"
+              meeting[:agenda] = "PDF files of Community Board 10's agenda can be found here: http://www.nyc.gov/html/mancb10/html/board/minutes.shtml"
+            elsif meeting[:name] == "Community Board 1"
+              meeting[:agenda] = one_agenda("http://www.nyc.gov/html/mancb1/html/community/community.shtml")
+            elsif
+              meeting[:agenda] = "Agenda currently unavailable - can be found on home website"
+            end
           # binding.pry
 
           hashes << meeting
