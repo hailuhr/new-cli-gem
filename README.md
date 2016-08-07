@@ -1,15 +1,15 @@
 # cli_project
 
-This Ruby Gem provides a CLI to view neighborhood community meetings in Manhattan per NYC Mayor's Community Affair Unit website.
+This Ruby Gem provides a CLI to view neighborhood community meetings in Manhattan through the New York City Mayor's Community Affair Unit website.
 
 ## Installation
 
-Install this gem by entering gem install cli_project. After the CLI is installed you can run the gem cli_project to find out about neighborhood community meetings and whats being discussed for it in your command line.
+Install this gem by entering 'gem install cli_project'. After the CLI is installed you can run the gem cli_project to find out about neighborhood community meetings, whats being discussed for in them, and more details through your command line.
 
 
 ## Usage
 
-Type ruby ruby bin/gem_project_bin and follow the on screen prompts.
+Enter 'ruby bin/gem_project_bin' to begin the program and follow the on screen prompts.
 
 
 ## Contributing
