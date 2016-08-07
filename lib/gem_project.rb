@@ -3,8 +3,9 @@ require 'pry'
 require 'nokogiri'
 
 require_relative "gem_project/version"
-require_relative 'gem_project/cli'
-require_relative 'gem_project/community_meeting.rb'
+require_relative 'gem_project/cli1.rb'
+require_relative 'gem_project/community_meeting1.rb'
+
 
 
 module GemProject

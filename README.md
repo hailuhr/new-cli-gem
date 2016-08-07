@@ -1,34 +1,16 @@
-# GemProject
+# cli_project
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/gem_project`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this anthe text above, and describe your gem
+This Ruby Gem provides a CLI to view neighborhood community meetings in Manhattan per NYC Mayor's Community Affair Unit website.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Install this gem by entering gem install cli_project. After the CLI is installed you can run the gem cli_project to find out about neighborhood community meetings and whats being discussed for it in your command line.
 
-```ruby
-gem 'gem_project'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install gem_project
 
 ## Usage
 
-TODO: Write usage instructions here
+Type ruby ruby bin/gem_project_bin and follow the on screen prompts.
 
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 

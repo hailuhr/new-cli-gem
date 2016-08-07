@@ -14,23 +14,31 @@ class GemProject::CommunityMeeting
   def self.scrape_all
       doc = Nokogiri::HTML(open("http://www.nyc.gov/html/cau/html/cb/manhattan.shtml"))
       meetings = []
+
       array_of_board_neighborhoods = doc.css('td.cb_text#top').map do |el|
         meeting = GemProject::CommunityMeeting.new
         meeting.neighborhoods = el.text.split(',')
         meetings << meeting
       end
 
+
       array_of_board_title = doc.css('td.cb_title').map do |title| title.text end
           meetings.each_with_index do |meeting, i|
-              meeting.name = array_of_board_title[i]
+              # meeting.name = array_of_board_title[i]
           end
+
+    def set_names(array)
+      array.each_with_index do |arr, i|
+
+
+    end
 
       array_of_urls = doc.css('td.cb_text a/@href').map do |el| el.text end
           meetings.each_with_index do |meeting, i|
             meeting.url = array_of_urls[i]
           end
 
-
+      binding.pry
       array = doc.css('tbody').map do |el| el.text end
       new_array = []
 
