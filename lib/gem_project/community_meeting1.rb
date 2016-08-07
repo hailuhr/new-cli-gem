@@ -15,9 +15,10 @@ class GemProject::CommunityMeeting1
     @website = meeting_hash[:website]
     @agenda = meeting_hash[:agenda]
     @hours = meeting_hash[:hours]
+    @phone = meeting_hash[:phone]
 
     @@all << self
-
+    # binding.pry
   end
 
   def self.create_from_collection(meetings_array)

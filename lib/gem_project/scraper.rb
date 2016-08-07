@@ -108,7 +108,7 @@ class Scraper
           meeting[:name] = name
 
           meeting[:phone] = scraped_phones(url)[i.to_i]
-
+          # binding.pry
           meeting[:website] = scrape_websites(url)[i.to_i]
           meeting[:hours] = scrape_hours(url)[i.to_i]
           meeting[:neighborhoods] = scrape_neighborhoods(url)[i.to_i].join(",")
@@ -121,7 +121,6 @@ class Scraper
             elsif
               meeting[:agenda] = "Agenda currently unavailable - can be found on home website"
             end
-          # binding.pry
 
           hashes << meeting
           # binding.pry
