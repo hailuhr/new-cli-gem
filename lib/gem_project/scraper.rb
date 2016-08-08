@@ -106,23 +106,18 @@ class Scraper
           meeting[:neighborhoods] = scrape_neighborhoods(url)[i.to_i].join(",")
           meeting[:address] = scraped_addresses(url)[i.to_i]
 
-          # self.set_exceptions(meeting)
-          # binding.pry
           hashes << meeting
-                    # binding.pry
         end
         hashes.each do |hash|
           self.set_exceptions(hash)
         end
         hashes
-        # binding.pry
       end
 
 
       def self.set_exceptions(hash)
         hash[:agenda] = nil
           hash.each_with_index do |name, i|
-              # binding.pry
               if hash[:name] == "Community Board 10"
                 hash[:agenda] = "PDF files of Community Board 10's agenda can be found here: http://www.nyc.gov/html/mancb10/html/board/minutes.shtml"
                 hash[:phone] = "Phone number not listed, apologies!"
@@ -131,7 +126,6 @@ class Scraper
               elsif
                 hash[:agenda] = "Agenda currently unavailable - can be found on home website"
               end
-                      # binding.pry
           end
       end
 

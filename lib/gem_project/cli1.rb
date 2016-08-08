@@ -20,7 +20,6 @@ class GemProject::CLI1
       meeting_array = []
       meeting_array = Scraper.meeting_hash(BASE_URL)
       GemProject::CommunityMeeting1.create_from_collection(meeting_array)
-      # binding.pry 
     end
 
 
@@ -36,7 +35,6 @@ class GemProject::CLI1
 
 
     def menu
-      # puts "\nEnter the number of the neighborhood you would like to get more information on. Type list to see all options again. To quit the program type exit.\n"
       display_meetings
       puts
 

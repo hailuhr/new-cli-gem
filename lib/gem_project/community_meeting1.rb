@@ -26,7 +26,6 @@ class GemProject::CommunityMeeting1
       self.new(el)
     end
 
-      # binding.pry
   end
 
 
