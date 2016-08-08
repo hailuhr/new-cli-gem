@@ -20,7 +20,7 @@ class GemProject::CLI1
       meeting_array = []
       meeting_array = Scraper.meeting_hash(BASE_URL)
       GemProject::CommunityMeeting1.create_from_collection(meeting_array)
-
+      # binding.pry 
     end
 
 

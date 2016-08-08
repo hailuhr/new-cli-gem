@@ -18,7 +18,7 @@ class GemProject::CommunityMeeting1
     @phone = meeting_hash[:phone]
 
     @@all << self
-    # binding.pry
+
   end
 
   def self.create_from_collection(meetings_array)
@@ -26,6 +26,7 @@ class GemProject::CommunityMeeting1
       self.new(el)
     end
 
+      # binding.pry
   end
 
 
