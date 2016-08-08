@@ -43,6 +43,4 @@ class GemProject::CommunityMeeting1
 end
 
 
-# harlem = GemProject::CommunityMeeting.new
-#
-# binding.pry
+# harlem = GemProject::CommunityMeeting1.new

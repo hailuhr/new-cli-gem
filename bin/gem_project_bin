@@ -3,9 +3,5 @@
 
 require_relative '../lib/gem_project.rb'
 
-# GemProject::CLI.new.call
-# GemProject::CLI.new.run
 
 GemProject::CLI1.new.run
-
-#encapsulation

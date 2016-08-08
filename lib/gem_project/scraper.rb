@@ -9,8 +9,7 @@ class Scraper
   def self.scrape_names(nyc_url)
     # doc = Nokogiri::HTML(open("http://www.nyc.gov/html/cau/html/cb/manhattan.shtml"))
     doc = Nokogiri::HTML(open(nyc_url))
-    names = doc.css('td.cb_title').map do |title| title.text end
-      # binding.pry
+    names = doc.css('td.cb_title').map{ |title| title.text }
       names
   end
 
@@ -23,18 +22,16 @@ class Scraper
 
 
   def self.scrape_websites(nyc_url)
-    # binding.pry
     # doc = Nokogiri::HTML(open("http://www.nyc.gov/html/cau/html/cb/manhattan.shtml"))
     doc = Nokogiri::HTML(open(nyc_url))
-    array_of_urls = doc.css('td.cb_text a/@href').map do |el| el.text end
-      # binding.pry
+    array_of_urls = doc.css('td.cb_text a/@href').map{ |el| el.text }
 
   end
 
+
   def self.scrape_phone_address(nyc_url)
-    # doc = Nokogiri::HTML(open("http://www.nyc.gov/html/cau/html/cb/manhattan.shtml"))
     doc = Nokogiri::HTML(open(nyc_url))
-    array = doc.css('tbody').map do |el| el.text end
+    array = doc.css('tbody').map { |el| el.text }
       new_array = []
 
       array.each_with_index do |el, i|
@@ -55,12 +52,10 @@ class Scraper
 
     def self.scraped_phones(nyc_url)
       scrape_phone_address(nyc_url)[0]
-      # binding.pry
     end
 
     def self.scraped_addresses(nyc_url)
         scrape_phone_address(nyc_url)[1]
-        # binding.pry
     end
 
 
@@ -68,7 +63,7 @@ class Scraper
       # doc = Nokogiri::HTML(open("http://www.nyc.gov/html/cau/html/cb/manhattan.shtml"))
       doc = Nokogiri::HTML(open(nyc_url))
       time = []
-      array = doc.css('tbody').map do |el| el.text end
+      array = doc.css('tbody').map{ |el| el.text }
 
       array.each_with_index.map do |meeting, i|
 
@@ -82,11 +77,9 @@ class Scraper
           part1 = "Board #{hours[0]}. "
           part2 = "Cabinet #{hours[1].gsub("\n", "")}."
           mtg_hours = [part1 + part2]
-        #why is this different than hours
+
           time << mtg_hours
 
-
-          # binding.pry
         end
         no_repeated_times = []
 
@@ -108,7 +101,6 @@ class Scraper
           meeting[:name] = name
 
           meeting[:phone] = scraped_phones(url)[i.to_i]
-          # binding.pry
           meeting[:website] = scrape_websites(url)[i.to_i]
           meeting[:hours] = scrape_hours(url)[i.to_i]
           meeting[:neighborhoods] = scrape_neighborhoods(url)[i.to_i].join(",")
@@ -123,12 +115,9 @@ class Scraper
             end
 
           hashes << meeting
-          # binding.pry
         end
 
         hashes
-
-        # binding.pry
 
       end
 
@@ -140,7 +129,6 @@ class Scraper
       page = doc.css("span.bodytext").text.split("Location")
       sentence = page[1].split("Conference Room")[1].split("Centre")
       s = sentence[1].gsub("\"", "").gsub("\n"," ").split("1)")
-      # binding.pry
       sentence_output = "1) #{s[1]}"
     end
 

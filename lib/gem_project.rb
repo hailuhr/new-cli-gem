@@ -9,5 +9,5 @@ require_relative 'gem_project/community_meeting1.rb'
 
 
 module GemProject
-  # Your code goes here...
+
 end

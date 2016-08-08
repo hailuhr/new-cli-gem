@@ -9,13 +9,11 @@ class GemProject::CLI1
 
     def run
       make_meetings
-      # display_meetings
       puts "Welcome to Community Meetings. Learn more about what's happening in your neighborhood.\n"
       puts "Enter the number for one of the neighborhoods listed below to find out about its community meetings, what's being discussed for it and more details."
       puts
       menu
       goodbye
-          # binding.pry
     end
 
     def make_meetings
@@ -41,15 +39,12 @@ class GemProject::CLI1
       # puts "\nEnter the number of the neighborhood you would like to get more information on. Type list to see all options again. To quit the program type exit.\n"
       display_meetings
       puts
-      # binding.pry
-      input = nil
 
-      # while input != "exit"
+      input = nil
       while input != "exit"
       input = gets.strip.downcase
           if input.to_i > 0 && input.to_i <= GemProject::CommunityMeeting1.all.size
             print_meeting_info(input)
-            # menu
             puts "\n\nEnter the number of the neighborhood you would like to get more information on. Type list to see all options again. To exit to quit the program."
           elsif input == "list"
             display_meetings
@@ -63,7 +58,7 @@ class GemProject::CLI1
 
 
     def print_meeting_info(input)
-      # binding.pry
+
       i = input.to_i
       meeting = GemProject::CommunityMeeting1.all[i.to_i - 1]
       puts "\nYou selected #{meeting.neighborhoods} - #{meeting.name}\n"
